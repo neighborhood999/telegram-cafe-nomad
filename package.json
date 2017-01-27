@@ -1,0 +1,31 @@
+{
+  "name": "telegram-cafe-nomad",
+  "version": "1.0.0",
+  "description": "Helping you find cafe store by telegram bot.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "api"
+  ],
+  "author": "Peng-Jie <dean.leehom@gmail.com> (https://github.com/neighborhood999)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neighborhood999/telegram-cafe-nomad.git"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-register": "^6.18.0"
+  },
+  "dependencies": {
+    "@google/maps": "^0.3.1",
+    "isomorphic-fetch": "^2.2.1",
+    "node-telegram-bot-api": "^0.26.0"
+  },
+  "license": "MIT"
+}
