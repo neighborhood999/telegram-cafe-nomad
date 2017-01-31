@@ -6,11 +6,6 @@
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": [
-    "telegram",
-    "bot",
-    "api"
-  ],
   "author": "Peng-Jie <dean.leehom@gmail.com> (https://github.com/neighborhood999)",
   "repository": {
     "type": "git",
