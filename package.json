@@ -4,18 +4,32 @@
   "description": "Helping you find cafe store by telegram bot.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "ava --verbose",
+    "watch": "npm test -- --watch",
+    "test:cov": "nyc npm test"
   },
   "author": "Peng-Jie <dean.leehom@gmail.com> (https://github.com/neighborhood999)",
   "repository": {
     "type": "git",
     "url": "https://github.com/neighborhood999/telegram-cafe-nomad.git"
   },
+  "ava": {
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ],
+    "files": "src/**/__tests__/*.spec.js",
+    "babel": "inherit"
+  },
   "devDependencies": {
+    "ava": "^0.17.0",
     "babel-cli": "^6.18.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-env": "^1.1.8",
-    "babel-register": "^6.18.0"
+    "babel-register": "^6.18.0",
+    "fetch-mock": "^5.9.3",
+    "nyc": "^10.1.2"
   },
   "dependencies": {
     "@google/maps": "^0.3.1",
