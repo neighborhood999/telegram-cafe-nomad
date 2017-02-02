@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-fetch';
-
 export const apiList = {
   taipei: 'https://cafenomad.tw/api/v1.0/cafes/taipei',
   taoyuan: 'https://cafenomad.tw/api/v1.0/cafes/taoyuan',
@@ -11,18 +9,9 @@ export const apiList = {
   pingtung: 'https://cafenomad.tw/api/v1.0/cafes/pingtung'
 };
 
-const selectLocation = location => {
+export const selectLocation = location => {
   location = location.toLowerCase();
   if (!apiList[location]) return [];
 
   return fetch(apiList[location]).then(response => response.json());
-};
-
-export const cafeInfo = async location => {
-  try {
-    const result = await selectLocation(location);
-    return result;
-  } catch (err) {
-    console.log(err);
-  }
 };

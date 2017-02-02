@@ -1,0 +1,8 @@
+sudo: false
+language: node_js
+node_js:
+  - '5'
+  - '6'
+  - '7'
+script: "npm run test:cov"
+after_script: "npm install codecov && nyc report --reporter=text-lcov > coverage.lcov && codecov"
