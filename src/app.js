@@ -95,6 +95,13 @@ bot.onText(/\location/, (message, match) => {
   }));
 });
 
+bot.onText(/\issue/, message => {
+  const chatId = message.chat.id;
+  const text = '✉️ *Telegram Bot 問題回報:* https://github.com/neighborhood999/telegram-cafe-nomad/issues';
+
+  return bot.sendMessage(chatId, text, options);
+});
+
 bot.on('callback_query', message => {
   switch (message.data) {
     case 'more':
