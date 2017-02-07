@@ -1,7 +1,6 @@
 import TelegramBot from 'node-telegram-bot-api';
 import googleMaps from '@google/maps';
 import fetch from 'isomorphic-fetch';
-import config from '../config';
 import { apiList, selectLocation } from './api';
 import { random } from './utils';
 import { more, getLocation } from './template/replyMarkup';
@@ -14,7 +13,9 @@ import {
 } from './template';
 import { reverseGeocode, cafeStoresNearby } from './utils/googleMaps';
 
-const { token, googleMapsAPIKey } = config;
+const token = process.env.BOT_TOKEN;
+const googleMapsAPIKey = process.env.GOOGLE_MAP_API_TOKEN;
+
 const options = { parse_mode: 'markdown' };
 const bot = new TelegramBot(token, { polling: true });
 const cafeInfo = async cityName => {

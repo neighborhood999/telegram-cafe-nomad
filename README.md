@@ -10,11 +10,13 @@ This is telegram bot for helping you find cafe store, thanks [howtomakeaturn](ht
 
 **First, You need have telegram account!**  
 
-Send `/newbot` command for [@BotFather](https://telegram.me/BotFather) to create new Bot after you will get bot token.  
+1. Send `/newbot` command for [@BotFather](https://telegram.me/BotFather) to create new Bot after you will get bot token.  
 
-Setting your **token** into `config.js` and run `yarn install` for installation dependencies.   
+2. Setting your **Bot Token** and **Google Maps API Token** into `.env`, we have sample `.env.example` for reference.  
 
-After install, you can run `yarn start` for boot up Telegram Bot.
+3. Running `yarn install` for installation dependencies.  
+
+4. After install, you can run `yarn start` for boot up Telegram Bot.
 
 ```sh
 $ yarn install
