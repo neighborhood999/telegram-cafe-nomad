@@ -35,6 +35,10 @@ $ yarn start
 
 ![Cafe Nomad](./screenshot/cafe-nomad.png)
 
+## Deploy
+
+You can deploy Telegram Bot on [Heroku](https://www.heroku.com/) or other platform, ex: [now](https://zeit.co/now). If you want to deploy on Heroku, please setting environment variables in `.env` or you can go on Heroku `Setting` -> `Config Variables` for setting and add new `Procfile` file. Lastly, in CLI command `heroku config:set NPM_CONFIG_PRODUCTION=false` for install `devDependencies`.
+
 ## Test
 
 ```sh

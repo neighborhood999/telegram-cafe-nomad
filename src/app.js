@@ -15,9 +15,22 @@ import { reverseGeocode, cafeStoresNearby } from './utils/googleMaps';
 
 const token = process.env.BOT_TOKEN;
 const googleMapsAPIKey = process.env.GOOGLE_MAP_API_TOKEN;
+const env = process.env.NODE_ENV || 'development';
 
 const options = { parse_mode: 'markdown' };
-const bot = new TelegramBot(token, { polling: true });
+let bot
+let fullInfo = '';
+
+if (env === 'production') {
+  const webHook = { port: process.env.PORT };
+  const url = process.env.APP_URL || 'https://<your heroku app url>.com:443';
+
+  bot = new TelegramBot(token, { webHook });
+  bot.setWebHook(`${url}/bot${token}`);
+} else {
+  bot = new TelegramBot(token, { polling: true });
+}
+
 const cafeInfo = async cityName => {
   try {
     const response = await selectLocation(cityName);
@@ -26,7 +39,6 @@ const cafeInfo = async cityName => {
     console.log(err);
   }
 };
-let fullInfo = '';
 
 bot.onText(/\/start/, message => {
   const chatId = message.chat.id;
