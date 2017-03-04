@@ -27,14 +27,22 @@ test('should get city list text', t => {
   const list = listTemplate(cityList);
   const expectedText = `📝 目前含有資料的城市：
 
+📍 *KEELUNG*
 📍 *TAIPEI*
 📍 *TAOYUAN*
 📍 *HSINCHU*
+📍 *MIAOLI*
 📍 *TAICHUNG*
+📍 *NANTOU*
 📍 *CHANGHUA*
+📍 *YUNLI*
+📍 *CHIAYI*
 📍 *TAINAN*
 📍 *KAOHSUING*
 📍 *PINGTUNG*
+📍 *HUALIEN*
+📍 *TAITUNG*
+📍 *PENGHU*
 `;
 
   t.is(list, expectedText);
