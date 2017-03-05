@@ -22,8 +22,8 @@ let bot
 let fullInfo = '';
 
 if (env === 'production') {
-  const webHook = { port: process.env.PORT };
-  const url = process.env.APP_URL || 'https://<your heroku app url>.com:443';
+  const webHook = { port: process.env.PORT || 443 };
+  const url = process.env.APP_URL || 'https://<your app url>.com:443';
 
   bot = new TelegramBot(token, { webHook });
   bot.setWebHook(`${url}/bot${token}`);
@@ -59,11 +59,11 @@ bot.onText(/\/list/, message => {
   return bot.sendMessage(chatId, listTemplate(cityList), options);
 });
 
-bot.onText(/\/where (.+)?/, (message, match) => {
+bot.onText(/\/where(\s)?(.+)?/, (message, match) => {
   const chatId = message.chat.id;
-  const cityName = match[1];
+  const cityName = match[2];
 
-  if (match[1] === undefined) {
+  if (match[2] === undefined) {
     return bot.sendMessage(chatId, '請輸入城市名稱！');
   }
 

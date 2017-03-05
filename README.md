@@ -8,7 +8,7 @@ This is telegram bot for helping you find cafe store, thanks [howtomakeaturn](ht
 
 ## Usage
 
-**First, You need have telegram account!**  
+**First, You need have Telegram account!**  
 
 1. Send `/newbot` command for [@BotFather](https://telegram.me/BotFather) to create new Bot after you will get bot token.  
 
@@ -37,7 +37,7 @@ $ yarn start
 
 ## Deploy
 
-You can deploy Telegram Bot on [Heroku](https://www.heroku.com/) or other platform, ex: [now](https://zeit.co/now). If you want to deploy on Heroku, please setting environment variables in `.env` or you can go on Heroku `Setting` -> `Config Variables` for setting and add new `Procfile` file. Lastly, in CLI command `heroku config:set NPM_CONFIG_PRODUCTION=false` for install `devDependencies`.
+You can deploy Telegram Bot on 𝚫 [now](https://zeit.co/now) or [Heroku](https://www.heroku.com/) platform, before deploy bot, you need setting environment variables on `.env`.
 
 ## Test
 
@@ -47,7 +47,7 @@ $ yarn test
 
 ## Cafe Nomad API
 
-[Cafe Nomad Developer](https://cafenomad.tw/developers/docs/v1.0)
+[Cafe Nomad API 1.0 Version](https://cafenomad.tw/developers/docs/v1.0)
 
 ## Related
 
@@ -55,6 +55,7 @@ $ yarn test
 - [Telegram Weather Bot (Nodejs)](https://github.com/neighborhood999/telegram-weather-bot)
 - [Telegram Weather Bot (Go)](https://github.com/neighborhood999/go-telegram-weather-bot)
 - [使用 Promise.all() 解決多次的 API Callback](https://medium.com/@bivinity/%E4%BD%BF%E7%94%A8-promise-all-%E8%A7%A3%E6%B1%BA%E5%A4%9A%E6%AC%A1%E7%9A%84-api-callback-b4feb817ad76#.yx61mh65l)
+- [部署 Telegram Bot](https://neighborhood999.github.io/2017/03/04/deploy-telegram-on-zeit-now/)
 
 ## LICENSE
 
