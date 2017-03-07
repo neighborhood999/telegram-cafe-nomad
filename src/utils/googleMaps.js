@@ -1,14 +1,17 @@
 export const reverseGeocode = origins => {
   return client => {
     return callback => {
-      client.reverseGeocode({ latlng: origins, result_type: 'street_address' }, (err, response) => {
-        if (err) return callback(err);
+      client.reverseGeocode(
+        { latlng: origins, result_type: 'street_address' },
+        (err, response) => {
+          if (err) return callback(err);
 
-        const { results } = response.json;
-        const longName = results[0]['address_components'][4]['long_name'];
+          const { results } = response.json;
+          const longName = results[0]['address_components'][4]['long_name'];
 
-        callback(null, longName.match(/[a-zA-Z0-9]+/)[0]);
-      });
+          callback(null, longName.match(/[a-zA-Z0-9]+/)[0]);
+        }
+      );
     };
   };
 };
@@ -25,6 +28,6 @@ export const cafeStoresNearby = origins => {
           resolve(text);
         });
       });
-    }
+    };
   };
 };
