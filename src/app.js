@@ -9,7 +9,7 @@ import {
   helpTemplate,
   listTemplate,
   whereTemplate,
-  cafeInfoTemplate,
+  cafeInfoTemplate
 } from './template';
 import { reverseGeocode, cafeStoresNearby } from './utils/googleMaps';
 
@@ -18,7 +18,7 @@ const googleMapsAPIKey = process.env.GOOGLE_MAP_API_TOKEN;
 const env = process.env.NODE_ENV || 'development';
 
 const options = { parse_mode: 'markdown' };
-let bot
+let bot;
 let fullInfo = '';
 
 if (env === 'production') {
@@ -71,28 +71,35 @@ bot.onText(/\/where(\s)?(.+)?/, (message, match) => {
     return bot.sendMessage(chatId, '抱歉，還沒有該城市相關咖啡廳資訊！');
   }
 
-  cafeInfo(cityName)
-    .then(stores => {
-      const randomIndex = random(stores);
-      const cafeStores = randomIndex.map(randNum => stores[randNum]);
-      let { take3StoresText, lastStores } = whereTemplate(cafeStores);
+  cafeInfo(cityName).then(stores => {
+    const randomIndex = random(stores);
+    const cafeStores = randomIndex.map(randNum => stores[randNum]);
+    let { take3StoresText, lastStores } = whereTemplate(cafeStores);
 
-      fullInfo += take3StoresText;
-      fullInfo += lastStores.map(store => cafeInfoTemplate(store));
+    fullInfo += take3StoresText;
+    fullInfo += lastStores.map(store => cafeInfoTemplate(store));
 
-      bot.sendMessage(chatId, take3StoresText, Object.assign({}, options, {
+    bot.sendMessage(
+      chatId,
+      take3StoresText,
+      Object.assign({}, options, {
         reply_markup: more
-      }));
-    });
+      })
+    );
+  });
 });
 
 bot.onText(/\location/, (message, match) => {
   const chatId = message.chat.id;
   const text = '按下按鈕取得定位！';
 
-  return bot.sendMessage(chatId, text, Object.assign({}, options, {
-    reply_markup: getLocation
-  }));
+  return bot.sendMessage(
+    chatId,
+    text,
+    Object.assign({}, options, {
+      reply_markup: getLocation
+    })
+  );
 });
 
 bot.onText(/\issue/, message => {
@@ -106,10 +113,13 @@ bot.on('callback_query', message => {
   switch (message.data) {
     case 'more':
       const { message: { message_id, chat: { id } } } = message;
-      bot.editMessageText(fullInfo, Object.assign({}, options, {
-        chat_id: id,
-        message_id
-      }));
+      bot.editMessageText(
+        fullInfo,
+        Object.assign({}, options, {
+          chat_id: id,
+          message_id
+        })
+      );
 
       // Cleaning up for next coming text.
       fullInfo = '';
@@ -134,45 +144,49 @@ bot.on('location', message => {
       return bot.sendMessage(chatId, '抱歉，還沒有該城市相關咖啡廳資訊！');
     }
 
-    cafeInfo(cityName)
-      .then(stores => {
-        const givePostion = cafeStoresNearby(origins)(googleMapsClient);
-        const newStores = stores.map(store => {
-          let position = { lat: store['latitude'], lng: store['longitude'] };
+    cafeInfo(cityName).then(stores => {
+      const givePostion = cafeStoresNearby(origins)(googleMapsClient);
+      const newStores = stores.map(store => {
+        let position = { lat: store['latitude'], lng: store['longitude'] };
 
-          return givePostion(position)
-            .then(distance => {
-              store = Object.assign({}, store, { distance });
+        return givePostion(position).then(distance => {
+          store = Object.assign({}, store, { distance });
 
-              return store;
-            });
+          return store;
         });
-
-        Promise.all(newStores)
-          .then(results => {
-            const nextStores = results.map(store => {
-              let disNum = store['distance'].match(/^[0-9]+(.[0-9]+)?|^[0-9]+(.[0-9]+)?/);
-              let unit = store['distance'].match(/km$|m$/);
-
-              store['disNum'] = disNum[0];
-              store['unit'] = unit[0];
-
-              return store;
-            });
-            const filterStores = nextStores.filter(store => store['disNum'] <= 5);
-
-            return filterStores;
-          })
-          .then(filterStores => {
-            let { take3StoresText, lastStores } = whereTemplate(filterStores);
-            fullInfo += take3StoresText;
-            fullInfo += lastStores.map(store => cafeInfoTemplate(store));
-
-            bot.sendMessage(chatId, take3StoresText, Object.assign({}, options, {
-              reply_markup: more
-            }));
-          })
-          .catch(err => console.log(err));
       });
+
+      Promise.all(newStores)
+        .then(results => {
+          const nextStores = results.map(store => {
+            let disNum = store['distance'].match(
+              /^[0-9]+(.[0-9]+)?|^[0-9]+(.[0-9]+)?/
+            );
+            let unit = store['distance'].match(/km$|m$/);
+
+            store['disNum'] = disNum[0];
+            store['unit'] = unit[0];
+
+            return store;
+          });
+          const filterStores = nextStores.filter(store => store['disNum'] <= 5);
+
+          return filterStores;
+        })
+        .then(filterStores => {
+          let { take3StoresText, lastStores } = whereTemplate(filterStores);
+          fullInfo += take3StoresText;
+          fullInfo += lastStores.map(store => cafeInfoTemplate(store));
+
+          bot.sendMessage(
+            chatId,
+            take3StoresText,
+            Object.assign({}, options, {
+              reply_markup: more
+            })
+          );
+        })
+        .catch(err => console.log(err));
+    });
   });
 });

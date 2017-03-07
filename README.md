@@ -39,6 +39,20 @@ $ yarn start
 
 You can deploy Telegram Bot on 𝚫 [now](https://zeit.co/now) or [Heroku](https://www.heroku.com/) platform, before deploy bot, you need setting environment variables on `.env`.
 
+## Lint
+
+```sh
+$ yarn run lint
+```
+
+## Format
+
+Use [prettier](https://github.com/prettier/prettier) for formatting our codes.
+
+```sh
+$ yarn run format
+```
+
 ## Test
 
 ```sh

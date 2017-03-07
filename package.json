@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "ava --verbose",
+    "test": "npm run lint && ava --verbose",
     "watch": "npm test -- --watch",
+    "lint": "eslint src",
+    "format": "eslint src --fix",
     "test:cov": "nyc npm test"
   },
   "author": "Peng-Jie <dean.leehom@gmail.com> (https://github.com/neighborhood999)",
@@ -25,11 +27,16 @@
   "devDependencies": {
     "ava": "^0.18.1",
     "babel-cli": "^6.22.2",
+    "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.22.0",
     "babel-preset-env": "^1.1.8",
     "babel-register": "^6.22.0",
+    "eslint": "^3.17.1",
+    "eslint-config-prettier": "^1.5.0",
+    "eslint-plugin-prettier": "^2.0.1",
     "fetch-mock": "^5.9.3",
-    "nyc": "^10.1.2"
+    "nyc": "^10.1.2",
+    "prettier": "^0.21.0"
   },
   "dependencies": {
     "@google/maps": "^0.3.1",

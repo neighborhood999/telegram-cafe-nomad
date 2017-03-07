@@ -12,7 +12,7 @@ export const random = array => {
 export const countStar = num => {
   let star = '';
 
-  if (num === 0) return star = '沒有評分';
+  if (num === 0) return (star = '沒有評分');
 
   if (isFloat(num)) {
     for (let i = 0; i < num - 0.5; i++) {
@@ -28,6 +28,6 @@ export const countStar = num => {
   return star;
 };
 
-function isFloat(n){
+function isFloat(n) {
   return Number(n) === n && n % 1 !== 0;
 }
