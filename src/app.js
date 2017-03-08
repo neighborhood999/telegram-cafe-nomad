@@ -3,7 +3,11 @@ import googleMaps from '@google/maps';
 import fetch from 'isomorphic-fetch';
 import { apiList, selectLocation } from './api';
 import { random, transformToEngCityName } from './utils';
-import { more, getLocation, citys } from './template/replyMarkup';
+import {
+  moreInlineButton,
+  getLocationButton,
+  citysButton
+} from './template/replyMarkup';
 import {
   startTemplate,
   helpTemplate,
@@ -67,7 +71,7 @@ bot.onText(/\/choose/, message => {
     chatId,
     text,
     Object.assign({}, options, {
-      reply_markup: citys
+      reply_markup: citysButton
     })
   );
 });
@@ -96,7 +100,7 @@ bot.onText(/\/where(\s)?(.+)?/, (message, match) => {
       chatId,
       take3StoresText,
       Object.assign({}, options, {
-        reply_markup: more
+        reply_markup: moreInlineButton
       })
     );
   });
@@ -110,7 +114,7 @@ bot.onText(/\location/, (message, match) => {
     chatId,
     text,
     Object.assign({}, options, {
-      reply_markup: getLocation
+      reply_markup: getLocationButton
     })
   );
 });
@@ -195,7 +199,7 @@ bot.on('location', message => {
             chatId,
             take3StoresText,
             Object.assign({}, options, {
-              reply_markup: more
+              reply_markup: moreInlineButton
             })
           );
         })
@@ -206,7 +210,6 @@ bot.on('location', message => {
 
 bot.on('message', message => {
   const chatId = message.chat.id;
-
   const cityName = transformToEngCityName(message);
 
   if (cityName) {
@@ -222,7 +225,7 @@ bot.on('message', message => {
         chatId,
         take3StoresText,
         Object.assign({}, options, {
-          reply_markup: more
+          reply_markup: moreInlineButton
         })
       );
     });

@@ -1,4 +1,4 @@
-export const more = JSON.stringify({
+export const moreInlineButton = JSON.stringify({
   inline_keyboard: [
     [
       {
@@ -9,7 +9,7 @@ export const more = JSON.stringify({
   ]
 });
 
-export const getLocation = JSON.stringify({
+export const getLocationButton = JSON.stringify({
   keyboard: [
     [
       {
@@ -24,7 +24,7 @@ export const getLocation = JSON.stringify({
   one_time_keyboard: true
 });
 
-export const citys = JSON.stringify({
+export const citysButton = JSON.stringify({
   keyboard: [
     [{ text: '📍 基隆' }, { text: '📍 台北' }, { text: '📍 桃園' }],
     [{ text: '📍 新竹' }, { text: '📍 苗栗' }, { text: '📍 台中' }],
