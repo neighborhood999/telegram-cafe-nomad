@@ -2,8 +2,12 @@ import TelegramBot from 'node-telegram-bot-api';
 import googleMaps from '@google/maps';
 import fetch from 'isomorphic-fetch';
 import { apiList, selectLocation } from './api';
-import { random } from './utils';
-import { more, getLocation } from './template/replyMarkup';
+import { random, transformToEngCityName } from './utils';
+import {
+  moreInlineButton,
+  getLocationButton,
+  citysButton
+} from './template/replyMarkup';
 import {
   startTemplate,
   helpTemplate,
@@ -59,6 +63,19 @@ bot.onText(/\/list/, message => {
   return bot.sendMessage(chatId, listTemplate(cityList), options);
 });
 
+bot.onText(/\/choose/, message => {
+  const chatId = message.chat.id;
+  const text = '請點擊按鈕選擇城市！';
+
+  return bot.sendMessage(
+    chatId,
+    text,
+    Object.assign({}, options, {
+      reply_markup: citysButton
+    })
+  );
+});
+
 bot.onText(/\/where(\s)?(.+)?/, (message, match) => {
   const chatId = message.chat.id;
   const cityName = match[2];
@@ -83,7 +100,7 @@ bot.onText(/\/where(\s)?(.+)?/, (message, match) => {
       chatId,
       take3StoresText,
       Object.assign({}, options, {
-        reply_markup: more
+        reply_markup: moreInlineButton
       })
     );
   });
@@ -97,7 +114,7 @@ bot.onText(/\location/, (message, match) => {
     chatId,
     text,
     Object.assign({}, options, {
-      reply_markup: getLocation
+      reply_markup: getLocationButton
     })
   );
 });
@@ -182,11 +199,35 @@ bot.on('location', message => {
             chatId,
             take3StoresText,
             Object.assign({}, options, {
-              reply_markup: more
+              reply_markup: moreInlineButton
             })
           );
         })
         .catch(err => console.log(err));
     });
   });
+});
+
+bot.on('message', message => {
+  const chatId = message.chat.id;
+  const cityName = transformToEngCityName(message);
+
+  if (cityName) {
+    cafeInfo(cityName).then(stores => {
+      const randomIndex = random(stores);
+      const cafeStores = randomIndex.map(randNum => stores[randNum]);
+      let { take3StoresText, lastStores } = whereTemplate(cafeStores);
+
+      fullInfo += take3StoresText;
+      fullInfo += lastStores.map(store => cafeInfoTemplate(store));
+
+      bot.sendMessage(
+        chatId,
+        take3StoresText,
+        Object.assign({}, options, {
+          reply_markup: moreInlineButton
+        })
+      );
+    });
+  }
 });

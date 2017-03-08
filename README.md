@@ -28,6 +28,7 @@ $ yarn start
 - `/start` - Start telegram bot.
 - `/help` - List all command what you can use.
 - `/list` - List all city.
+- `/choose` - Click button choose a city.
 - `/where cityName` - You will get random five cafe stores information in that city.
 - `/location` - Getting your position and check your city whether in API list, based on your location use Google Maps API calculate close to you cafe store.
 
