@@ -12,10 +12,12 @@ import {
 test('should get start text', t => {
   const expectedText1 = `
   哈囉！我是 Cafe Nomad Bot，正在找工作咖啡廳嗎？☕️
-輸入 \`/help\` 讓 Bot 協助你（妳）尋找吧！😉
+使用 \`/choose\` 快速選擇城市尋找咖啡廳 or
+輸入 \`/help\` 查看 Bot 提供的功能吧！😉
 `;
   const expectedText2 = `\`/list\` ➡️ 列出城市清單
 \`/where\` ➡️ 隨機抽出五筆咖啡廳
+\`/choose\` ➡️ 點擊按鈕選擇城市，隨機五間咖啡廳
 \`/location\` ➡️ 選出離你最近的五家咖啡廳`;
 
   t.is(startTemplate, expectedText1);

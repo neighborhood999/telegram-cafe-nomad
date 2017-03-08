@@ -2,8 +2,8 @@ import TelegramBot from 'node-telegram-bot-api';
 import googleMaps from '@google/maps';
 import fetch from 'isomorphic-fetch';
 import { apiList, selectLocation } from './api';
-import { random } from './utils';
-import { more, getLocation } from './template/replyMarkup';
+import { random, transformToEngCityName } from './utils';
+import { more, getLocation, citys } from './template/replyMarkup';
 import {
   startTemplate,
   helpTemplate,
@@ -57,6 +57,19 @@ bot.onText(/\/list/, message => {
   const cityList = Object.keys(apiList).map(city => city.toUpperCase());
 
   return bot.sendMessage(chatId, listTemplate(cityList), options);
+});
+
+bot.onText(/\/choose/, message => {
+  const chatId = message.chat.id;
+  const text = '請點擊按鈕選擇城市！';
+
+  return bot.sendMessage(
+    chatId,
+    text,
+    Object.assign({}, options, {
+      reply_markup: citys
+    })
+  );
 });
 
 bot.onText(/\/where(\s)?(.+)?/, (message, match) => {
@@ -189,4 +202,29 @@ bot.on('location', message => {
         .catch(err => console.log(err));
     });
   });
+});
+
+bot.on('message', message => {
+  const chatId = message.chat.id;
+
+  const cityName = transformToEngCityName(message);
+
+  if (cityName) {
+    cafeInfo(cityName).then(stores => {
+      const randomIndex = random(stores);
+      const cafeStores = randomIndex.map(randNum => stores[randNum]);
+      let { take3StoresText, lastStores } = whereTemplate(cafeStores);
+
+      fullInfo += take3StoresText;
+      fullInfo += lastStores.map(store => cafeInfoTemplate(store));
+
+      bot.sendMessage(
+        chatId,
+        take3StoresText,
+        Object.assign({}, options, {
+          reply_markup: more
+        })
+      );
+    });
+  }
 });
