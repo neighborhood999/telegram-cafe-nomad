@@ -29,9 +29,12 @@ export const countStar = num => {
 };
 
 export const transformToEngCityName = message => {
+  if (typeof message != 'object') return;
+
+  const chineseName = message.text.slice(3, 5);
   let city;
 
-  switch (message.text.slice(3, 5)) {
+  switch (chineseName) {
     case '基隆':
       city = 'keelung';
       break;
@@ -80,8 +83,6 @@ export const transformToEngCityName = message => {
     case '澎湖':
       city = 'penghu';
       break;
-    default:
-      return;
   }
 
   return city;

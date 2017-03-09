@@ -129,4 +129,7 @@ test('should transform message text city name to english city name (other city t
   const mockMessage15 = Object.assign({}, templateMessage, { text: '📍 澎湖' });
   const cityName15 = transformToEngCityName(mockMessage15);
   t.is(cityName15, 'penghu');
+
+  const cityName16 = transformToEngCityName('test');
+  t.is(cityName16, undefined);
 });
