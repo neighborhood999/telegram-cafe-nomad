@@ -25,33 +25,7 @@ test('should calcuate star and return emoji text', t => {
   t.is(textResult3, expectedText3);
 });
 
-test('should transform message text city name to english city name.', t => {
-  const expectCity = 'taipei';
-  const mockMessage = {
-    message_id: 440,
-    from: {
-      id: 195214679,
-      first_name: 'Peng',
-      last_name: 'Jie',
-      username: 'pengjie'
-    },
-    chat: {
-      id: 195214679,
-      first_name: 'Peng',
-      last_name: 'Jie',
-      username: 'pengjie',
-      type: 'private'
-    },
-    date: 1488943714,
-    text: '📍 台北'
-  };
-
-  const cityName = transformToEngCityName(mockMessage);
-
-  t.is(cityName, expectCity);
-});
-
-test('should transform message text city name to english city name (other city test)', t => {
+test('should transform message text field variable to english city name.', t => {
   const templateMessage = {
     message_id: 440,
     from: {
@@ -69,67 +43,55 @@ test('should transform message text city name to english city name (other city t
     },
     date: 1488943714
   };
+  const citys = [
+    '📍 基隆',
+    '📍 台北',
+    '📍 桃園',
+    '📍 新竹',
+    '📍 苗栗',
+    '📍 台中',
+    '📍 南投',
+    '📍 彰化',
+    '📍 雲林',
+    '📍 嘉義',
+    '📍 台南',
+    '📍 高雄',
+    '📍 屏東',
+    '📍 花蓮',
+    '📍 台東',
+    '📍 澎湖'
+  ];
+  const expectedCitys = [
+    'keelung',
+    'taipei',
+    'taoyuan',
+    'hsinchu',
+    'miaoli',
+    'taichung',
+    'nantou',
+    'changhua',
+    'yunli',
+    'chiayi',
+    'tainan',
+    'kaohsuing',
+    'pingtung',
+    'hualien',
+    'taitung',
+    'penghu'
+  ];
 
-  const mockMessage1 = Object.assign({}, templateMessage, { text: '📍 基隆' });
-  const cityName1 = transformToEngCityName(mockMessage1);
-  t.is(cityName1, 'keelung');
+  let mockMessage;
+  let cityName;
+  for (let i = 0; i < citys.length; i++) {
+    mockMessage = Object.assign({}, templateMessage, { text: citys[i] });
+    cityName = transformToEngCityName(mockMessage);
 
-  const mockMessage2 = Object.assign({}, templateMessage, { text: '📍 桃園' });
-  const cityName2 = transformToEngCityName(mockMessage2);
-  t.is(cityName2, 'taoyuan');
+    t.is(cityName, expectedCitys[i]);
+  }
+});
 
-  const mockMessage3 = Object.assign({}, templateMessage, { text: '📍 新竹' });
-  const cityName3 = transformToEngCityName(mockMessage3);
-  t.is(cityName3, 'hsinchu');
+test('if message not a object will get cityName equal to undefined', t => {
+  const cityName = transformToEngCityName('test');
 
-  const mockMessage4 = Object.assign({}, templateMessage, { text: '📍 苗栗' });
-  const cityName4 = transformToEngCityName(mockMessage4);
-  t.is(cityName4, 'miaoli');
-
-  const mockMessage5 = Object.assign({}, templateMessage, { text: '📍 台中' });
-  const cityName5 = transformToEngCityName(mockMessage5);
-  t.is(cityName5, 'taichung');
-
-  const mockMessage6 = Object.assign({}, templateMessage, { text: '📍 南投' });
-  const cityName6 = transformToEngCityName(mockMessage6);
-  t.is(cityName6, 'nantou');
-
-  const mockMessage7 = Object.assign({}, templateMessage, { text: '📍 彰化' });
-  const cityName7 = transformToEngCityName(mockMessage7);
-  t.is(cityName7, 'changhua');
-
-  const mockMessage8 = Object.assign({}, templateMessage, { text: '📍 雲林' });
-  const cityName8 = transformToEngCityName(mockMessage8);
-  t.is(cityName8, 'yunli');
-
-  const mockMessage9 = Object.assign({}, templateMessage, { text: '📍 嘉義' });
-  const cityName9 = transformToEngCityName(mockMessage9);
-  t.is(cityName9, 'chiayi');
-
-  const mockMessage10 = Object.assign({}, templateMessage, { text: '📍 台南' });
-  const cityName10 = transformToEngCityName(mockMessage10);
-  t.is(cityName10, 'tainan');
-
-  const mockMessage11 = Object.assign({}, templateMessage, { text: '📍 高雄' });
-  const cityName11 = transformToEngCityName(mockMessage11);
-  t.is(cityName11, 'kaohsuing');
-
-  const mockMessage12 = Object.assign({}, templateMessage, { text: '📍 屏東' });
-  const cityName12 = transformToEngCityName(mockMessage12);
-  t.is(cityName12, 'pingtung');
-
-  const mockMessage13 = Object.assign({}, templateMessage, { text: '📍 花蓮' });
-  const cityName13 = transformToEngCityName(mockMessage13);
-  t.is(cityName13, 'hualien');
-
-  const mockMessage14 = Object.assign({}, templateMessage, { text: '📍 台東' });
-  const cityName14 = transformToEngCityName(mockMessage14);
-  t.is(cityName14, 'taitung');
-
-  const mockMessage15 = Object.assign({}, templateMessage, { text: '📍 澎湖' });
-  const cityName15 = transformToEngCityName(mockMessage15);
-  t.is(cityName15, 'penghu');
-
-  const cityName16 = transformToEngCityName('test');
-  t.is(cityName16, undefined);
+  t.is(cityName, undefined);
 });
