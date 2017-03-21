@@ -66,7 +66,7 @@ $ yarn test
 
 ## Related
 
-- [Telegram Bot 開發起手式](Telegram Bot 開發起手式)
+- [Telegram Bot 開發起手式](https://neighborhood999.github.io/2016/07/19/Develop-telegram-bot/)
 - [Telegram Weather Bot (Nodejs)](https://github.com/neighborhood999/telegram-weather-bot)
 - [Telegram Weather Bot (Go)](https://github.com/neighborhood999/go-telegram-weather-bot)
 - [使用 Promise.all() 解決多次的 API Callback](https://medium.com/@bivinity/%E4%BD%BF%E7%94%A8-promise-all-%E8%A7%A3%E6%B1%BA%E5%A4%9A%E6%AC%A1%E7%9A%84-api-callback-b4feb817ad76#.yx61mh65l)
