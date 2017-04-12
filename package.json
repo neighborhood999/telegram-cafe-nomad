@@ -25,18 +25,18 @@
     "babel": "inherit"
   },
   "devDependencies": {
-    "ava": "^0.18.1",
-    "babel-cli": "^6.22.2",
-    "babel-eslint": "^7.1.1",
-    "babel-polyfill": "^6.22.0",
-    "babel-preset-env": "^1.1.8",
-    "babel-register": "^6.22.0",
-    "eslint": "^3.17.1",
-    "eslint-config-prettier": "^1.5.0",
+    "ava": "^0.19.1",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.3.3",
+    "babel-register": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-prettier": "^1.6.0",
     "eslint-plugin-prettier": "^2.0.1",
-    "fetch-mock": "^5.9.3",
-    "nyc": "^10.1.2",
-    "prettier": "^0.21.0"
+    "fetch-mock": "^5.9.4",
+    "nyc": "^10.2.0",
+    "prettier": "^0.22.0"
   },
   "dependencies": {
     "@google/maps": "^0.3.1",

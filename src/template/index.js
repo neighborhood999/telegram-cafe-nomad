@@ -20,7 +20,8 @@ export const listTemplate = cityList => {
   return `${text}${citys}`;
 };
 
-export const cafeInfoTemplate = store => `🚩 *${store.name}*
+export const cafeInfoTemplate = store =>
+  `🚩 *${store.name}*
 📍 [${store.address}](http://maps.google.com/maps?daddr=${store.latitude},${store.longitude})
 💸 ✖️ *${store.cheap}*
 ☕️ ${countStar(store.tasty)}
