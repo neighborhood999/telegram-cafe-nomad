@@ -15,7 +15,7 @@ export const listTemplate = cityList => {
   let text = `📝 目前含有資料的城市：\n\n`;
   let citys = '';
 
-  cityList.map(city => citys += `📍 *${city}*\n`);
+  cityList.map(city => (citys += `📍 *${city}*\n`));
 
   return `${text}${citys}`;
 };
@@ -34,7 +34,7 @@ export const whereTemplate = stores => {
   const lastStores = stores.slice(3, 5);
   let take3StoresText = '';
 
-  take3Stores.map(store => take3StoresText += cafeInfoTemplate(store));
+  take3Stores.map(store => (take3StoresText += cafeInfoTemplate(store)));
 
   return { take3StoresText, lastStores };
 };
