@@ -25,7 +25,9 @@ export const cafeInfoTemplate = store =>
 📍 [${store.address}](http://maps.google.com/maps?daddr=${store.latitude},${store.longitude})
 💸 ✖️ *${store.cheap}*
 ☕️ ${countStar(store.tasty)}
-${store.disNum && store.unit ? `🔜 距離約 *${store['disNum']} ${store['unit']}*` : ''}
+${store.disNum && store.unit
+    ? `🔜 距離約 *${store['disNum']} ${store['unit']}*`
+    : ''}
 🔍 更多咖啡廳訊息 - [點我👆🏻](${store.url})\n
 `;
 
