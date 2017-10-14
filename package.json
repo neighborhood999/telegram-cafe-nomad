@@ -27,16 +27,16 @@
   "devDependencies": {
     "ava": "^0.22.0",
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-register": "^6.26.0",
-    "eslint": "^4.5.0",
-    "eslint-config-prettier": "^2.3.0",
-    "eslint-plugin-prettier": "^2.2.0",
-    "fetch-mock": "^5.12.2",
-    "nyc": "^11.0.2",
-    "prettier": "^1.5.3"
+    "eslint": "^4.8.0",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "fetch-mock": "^5.13.1",
+    "nyc": "^11.2.1",
+    "prettier": "^1.7.4"
   },
   "dependencies": {
     "@google/maps": "^0.4.3",
